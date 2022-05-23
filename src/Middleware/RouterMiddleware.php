@@ -57,10 +57,6 @@ final class RouterMiddleware implements MiddlewareInterface
         $routeHandler = $routeInfo[1];
         $vars = $routeInfo[2];
 
-        foreach ($vars as $name => $var) {
-            $request = $request->withAttribute($name, $var);
-        }
-
         $response = $handler->handle($request);
 
         // Get handler and middlewares
