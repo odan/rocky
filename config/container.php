@@ -34,10 +34,7 @@ return [
     },
 
     Router::class => function () {
-        $router = new Router(new RouteCollector(new Std(), new GroupCountBased()));
-        (require __DIR__ . '/routes.php')($router);
-
-        return $router;
+        return new Router(new RouteCollector(new Std(), new GroupCountBased()));
     },
 
     ResponseFactoryInterface::class => function (ContainerInterface $container) {

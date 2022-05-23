@@ -10,6 +10,7 @@ final class Router
     private RouteCollector $collector;
     private string $groupPattern;
     private array $middleware;
+    private string $basePath = '';
 
     public function __construct(RouteCollector $collector, string $pattern = '')
     {
@@ -48,10 +49,11 @@ final class Router
     {
         $newRoute = new self($this->collector, $this->groupPattern);
         $newRoute->parent = $this;
+        $newRoute->basePath = $this->basePath;
 
         $routeHandler = $this->createRouteHandler($newRoute, $handler);
 
-        $this->collector->addRoute($httpMethod, $this->groupPattern . $route, $routeHandler);
+        $this->collector->addRoute($httpMethod, $this->basePath . $this->groupPattern . $route, $routeHandler);
 
         return $newRoute;
     }
@@ -60,6 +62,7 @@ final class Router
     {
         $routeGroup = new self($this->collector, $this->groupPattern . $pattern);
         $routeGroup->parent = $this;
+        $routeGroup->basePath = $this->basePath;
 
         // Collect routes
         $callable($routeGroup);
@@ -96,5 +99,10 @@ final class Router
                 'middleware' => $middlewares,
             ];
         };
+    }
+
+    public function setBasePath(string $basePath): void
+    {
+        $this->basePath = $basePath;
     }
 }
