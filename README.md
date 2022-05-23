@@ -22,7 +22,7 @@ Requests per seconds (higher is better):
 
 * Vanilla PHP: 2801
 * FastRoute: 1054
-* This project with FastRoute: 437
+* **This project with FastRoute: 437**
 * Slim 4 demo: 415
 * This project with league/route: 204
 * odan/slim4-skeleton: 182
