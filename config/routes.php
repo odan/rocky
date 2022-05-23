@@ -6,7 +6,7 @@ use App\Router\Router;
 
 return function (Router $router) {
     $router->get('/', \App\Action\HomeAction::class);
-   /* $router->get('/user/{name}/{id:[0-9]+}', \App\Action\HomeAction::class);
+    $router->get('/user/{name}/{id:[0-9]+}', \App\Action\HomeAction::class);
 
     $router->group('/api', function (Router $router) {
         $router->get('/users', \App\Action\UserListAction::class);
@@ -20,5 +20,5 @@ return function (Router $router) {
                 ->middleware(OutgoingMiddleware::class);
         })->middleware(OutgoingMiddleware::class)
             ->middleware(OutgoingMiddleware::class);
-    })->middleware(ApiExceptionMiddleware::class);*/
+    })->middleware(ApiExceptionMiddleware::class);
 };
