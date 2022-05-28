@@ -1,5 +1,6 @@
 <?php
 
+use App\Router\RouteParser;
 use App\Router\Router;
 use FastRoute\DataGenerator\GroupCountBased;
 use FastRoute\RouteCollector;
@@ -35,6 +36,10 @@ return [
 
     Router::class => function () {
         return new Router(new RouteCollector(new Std(), new GroupCountBased()));
+    },
+
+    RouteParser::class => function (ContainerInterface $container) {
+        return new RouteParser($container->get(Router::class));
     },
 
     ResponseFactoryInterface::class => function (ContainerInterface $container) {

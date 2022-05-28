@@ -6,6 +6,8 @@ use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
+use RecursiveArrayIterator;
+use RecursiveIteratorIterator;
 use RuntimeException;
 use function array_key_exists;
 use function array_reverse;
@@ -13,21 +15,20 @@ use function http_build_query;
 use function implode;
 use function is_string;
 
-final class RouteParser implements RouteParserInterface
+final class RouteParser
 {
-    private Router $router;
     private RouteCollector $routeCollector;
+    private Std $routeParser;
 
     public function __construct(Router $router)
     {
-        $this->router = $router;
         $this->routeCollector = $router->getRouteCollector();
         $this->routeParser = new Std();
     }
 
-    public function relativeUrlFor(string $routeName, array $data = [], array $queryParams = []): string
+    public function urlFor(string $routeName, array $data = [], array $queryParams = []): string
     {
-        $route = $this->routeCollector->getNamedRoute($routeName);
+        $route = $this->getNamedRoute($routeName);
         $pattern = $route->getPattern();
 
         $segments = [];
@@ -86,34 +87,6 @@ final class RouteParser implements RouteParserInterface
         return $url;
     }
 
-    public function getNamedRoute(string $name): RouteInterface
-    {
-        foreach ($this->routes as $route) {
-            if ($name === $route->getName()) {
-                return $route;
-            }
-        }
-        throw new RuntimeException('Named route does not exist for name: ' . $name);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function urlFor(string $routeName, array $data = [], array $queryParams = []): string
-    {
-        $basePath = $this->routeCollector->getBasePath();
-        $url = $this->relativeUrlFor($routeName, $data, $queryParams);
-
-        if ($basePath) {
-            $url = $basePath . $url;
-        }
-
-        return $url;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function fullUrlFor(UriInterface $uri, string $routeName, array $data = [], array $queryParams = []): string
     {
         $path = $this->urlFor($routeName, $data, $queryParams);
@@ -122,5 +95,22 @@ final class RouteParser implements RouteParserInterface
         $protocol = ($scheme ? $scheme . ':' : '') . ($authority ? '//' . $authority : '');
 
         return $protocol . $path;
+    }
+
+    public function getNamedRoute(string $name): Route
+    {
+        $routes = $this->routeCollector->getData();
+
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveArrayIterator($routes, RecursiveArrayIterator::CHILD_ARRAYS_ONLY)
+        );
+
+        foreach ($iterator as $route) {
+            if ($route instanceof Route && $name === $route->getName()) {
+                return $route;
+            }
+        }
+
+        throw new RuntimeException('Named route does not exist for name: ' . $name);
     }
 }

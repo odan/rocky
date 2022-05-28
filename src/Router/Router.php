@@ -3,10 +3,11 @@
 namespace App\Router;
 
 use FastRoute\RouteCollector;
+use Psr\Http\Server\MiddlewareInterface;
 
 final class Router
 {
-    private ?Router $parent = null;
+    private ?Router $parent;
     private RouteCollector $collector;
     private string $groupPattern;
     private array $middleware;
@@ -20,49 +21,46 @@ final class Router
         $this->middleware = [];
     }
 
-    public function get(string $route, string $handler): Router
+    public function get(string $route, string $handler): Route
     {
         return $this->addRoute('GET', $route, $handler);
     }
 
-    public function post(string $route, string $handler): Router
+    public function post(string $route, string $handler): Route
     {
         return $this->addRoute('POST', $route, $handler);
     }
 
-    public function put(string $route, string $handler): Router
+    public function put(string $route, string $handler): Route
     {
         return $this->addRoute('PUT', $route, $handler);
     }
 
-    public function patch(string $route, string $handler): Router
+    public function patch(string $route, string $handler): Route
     {
         return $this->addRoute('PATCH', $route, $handler);
     }
 
-    public function delete(string $route, string $handler): Router
+    public function delete(string $route, string $handler): Route
     {
         return $this->addRoute('DELETE', $route, $handler);
     }
 
-    public function addRoute(string $httpMethod, string $route, string $handler): Router
+    public function addRoute(string $httpMethod, string $pattern, string $handler): Route
     {
-        $newRoute = new self($this->collector, $this->groupPattern);
-        $newRoute->parent = $this;
-        $newRoute->basePath = $this->basePath;
+        $routePattern = $this->basePath . $this->groupPattern . $pattern;
+        $route = new Route($httpMethod, $routePattern, $handler, $this);
 
-        $routeHandler = $this->createRouteHandler($newRoute, $handler);
+        $this->collector->addRoute($httpMethod, $routePattern, $route);
 
-        $this->collector->addRoute($httpMethod, $this->basePath . $this->groupPattern . $route, $routeHandler);
-
-        return $newRoute;
+        return $route;
     }
 
     public function group(string $pattern, callable $callable): Router
     {
-        $routeGroup = new self($this->collector, $this->groupPattern . $pattern);
+        $routePattern = $this->basePath . $this->groupPattern . $pattern;
+        $routeGroup = new self($this->collector, $routePattern);
         $routeGroup->parent = $this;
-        $routeGroup->basePath = $this->basePath;
 
         // Collect routes
         $callable($routeGroup);
@@ -70,35 +68,33 @@ final class Router
         return $routeGroup;
     }
 
-    public function middleware(string $middleware): self
+    public function add(string $middleware): self
     {
         $this->middleware[] = $middleware;
 
         return $this;
     }
 
+    public function addMiddleware(MiddlewareInterface $middleware): self
+    {
+        $this->middleware[] = $middleware;
+
+        return $this;
+    }
+
+    public function getMiddlewares(): array
+    {
+        return $this->middleware;
+    }
+
+    public function getParent(): ?Router
+    {
+        return $this->parent;
+    }
+
     public function getRouteCollector(): RouteCollector
     {
         return $this->collector;
-    }
-
-    private function createRouteHandler(Router $route, string $controller): callable
-    {
-        return function () use ($controller, $route) {
-            $middlewares = $route->middleware;
-            $parent = $route->parent;
-            while ($parent) {
-                foreach ($parent->middleware as $middleware) {
-                    $middlewares[] = $middleware;
-                }
-                $parent = $parent->parent;
-            }
-
-            return [
-                'handler' => $controller,
-                'middleware' => $middlewares,
-            ];
-        };
     }
 
     public function setBasePath(string $basePath): void
