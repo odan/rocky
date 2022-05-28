@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Responder;
+namespace App\Renderer;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
 
-final class ErrorResponder
+final class ErrorRenderer
 {
     private ResponseFactoryInterface $responseFactory;
 

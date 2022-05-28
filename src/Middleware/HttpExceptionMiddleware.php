@@ -2,7 +2,7 @@
 
 namespace App\Middleware;
 
-use App\Responder\ErrorResponder;
+use App\Renderer\ErrorRenderer;
 use App\Router\HttpExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,11 +11,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class HttpExceptionMiddleware implements MiddlewareInterface
 {
-    private ErrorResponder $errorResponder;
+    private ErrorRenderer $errorRenderer;
 
-    public function __construct(ErrorResponder $responder)
+    public function __construct(ErrorRenderer $renderer)
     {
-        $this->errorResponder = $responder;
+        $this->errorRenderer = $renderer;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -23,7 +23,7 @@ final class HttpExceptionMiddleware implements MiddlewareInterface
         try {
             return $handler->handle($request);
         } catch (HttpExceptionInterface $exception) {
-            return $this->errorResponder->render($exception, $request, $exception->getCode());
+            return $this->errorRenderer->render($exception, $request, $exception->getCode());
         }
     }
 }

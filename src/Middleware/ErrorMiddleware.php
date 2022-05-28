@@ -2,7 +2,7 @@
 
 namespace App\Middleware;
 
-use App\Responder\ErrorResponder;
+use App\Renderer\ErrorRenderer;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,11 +12,11 @@ use Throwable;
 
 final class ErrorMiddleware implements MiddlewareInterface
 {
-    private ErrorResponder $errorResponder;
+    private ErrorRenderer $errorRenderer;
 
-    public function __construct(ErrorResponder $responder)
+    public function __construct(ErrorRenderer $renderer)
     {
-        $this->errorResponder = $responder;
+        $this->errorRenderer = $renderer;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -24,7 +24,7 @@ final class ErrorMiddleware implements MiddlewareInterface
         try {
             return $handler->handle($request);
         } catch (Throwable $exception) {
-            return $this->errorResponder->render(
+            return $this->errorRenderer->render(
                 $exception,
                 $request,
                 StatusCodeInterface::STATUS_INTERNAL_SERVER_ERROR
