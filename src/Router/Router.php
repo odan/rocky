@@ -101,4 +101,9 @@ final class Router
     {
         $this->basePath = $basePath;
     }
+
+    public function getBasePath(): string
+    {
+        return $this->basePath;
+    }
 }
