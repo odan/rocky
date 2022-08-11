@@ -9,6 +9,7 @@ use Psr\Http\Message\UriInterface;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
+
 use function array_key_exists;
 use function array_reverse;
 use function http_build_query;

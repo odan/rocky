@@ -1,6 +1,9 @@
 <?php
 
-return (new PhpCsFixer\Config())
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+return (new Config())
     ->setUsingCache(false)
     ->setRiskyAllowed(true)
     ->setRules(
@@ -38,7 +41,7 @@ return (new PhpCsFixer\Config())
         ]
     )
     ->setFinder(
-        PhpCsFixer\Finder::create()
+        Finder::create()
             ->in(__DIR__ . '/src')
             ->in(__DIR__ . '/tests')
             ->in(__DIR__ . '/config')
