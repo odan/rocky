@@ -11,7 +11,7 @@ A micro framework for PHP.
 ```
 git clone https://github.com/odan/blini.git --depth 1 myapp/
 cd myapp/
-composer update
+composer update --no-dev -o
 ```
 
 Start the app:
