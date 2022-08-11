@@ -1,6 +1,6 @@
 # Blini
 
-A PHP micro framework based on PSR-7 / PSR-15 standards. 
+A micro framework for PHP. 
 
 ## Requirements
 
