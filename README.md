@@ -35,7 +35,7 @@ Disable XDebug in php.ini
 
 Restart the webserver.
 
-Command to test the performance: `ab -n 5000 -c 10 -k http://localhost/simyo/`
+Command to test the performance: `ab -n 5000 -c 10 -k http://localhost/`
 
 ## License
 
