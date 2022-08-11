@@ -12,7 +12,17 @@ A micro framework for PHP.
 composer create-project odan/blini my-app
 ```
 
-## Performance
+## Performance Comparison
+
+Requests per seconds (more is better):
+
+* Vanilla PHP: 5240
+* FastRoute: 1054
+* **This project with FastRoute: 437**
+* Slim 4 demo: 415
+* This project with symfony/routing: 347
+* This project with league/route: 204
+* odan/slim4-skeleton: 182
 
 Run: `composer update --no-dev -o`
 
@@ -26,16 +36,6 @@ Disable XDebug in php.ini
 Restart the webserver.
 
 Command to test the performance: `ab -n 5000 -c 10 -k http://localhost/simyo/`
-
-Requests per seconds (more is better):
-
-* Vanilla PHP: 5240
-* FastRoute: 1054
-* **This project with FastRoute: 437**
-* Slim 4 demo: 415
-* This project with symfony/routing: 347
-* This project with league/route: 204
-* odan/slim4-skeleton: 182
 
 ## License
 
