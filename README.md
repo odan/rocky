@@ -10,7 +10,17 @@ A micro framework for PHP.
 
 ```
 git clone https://github.com/odan/blini.git --depth 1 myapp/
+cd myapp/
+composer update
 ```
+
+Start the app:
+
+```
+php -S localhost:8080 -t public/
+```
+
+Open: <http://localhost:8080>
 
 Optional, push to your repo:
 
