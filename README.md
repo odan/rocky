@@ -1,15 +1,15 @@
-# Simyo
+# Blini
 
-A minimal PSR-7 / PSR-15 application. 
+A PHP micro framework based on PSR-7 / PSR-15 standards. 
 
 ## Requirements
 
-* PHP 7.4+
+* PHP 7.4+ or 8+
 
 ## Installation
 
 ```
-composer create-project odan/simyo my-app
+composer create-project odan/blini my-app
 ```
 
 ## Performance
