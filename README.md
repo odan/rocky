@@ -1,6 +1,6 @@
 # Blini
 
-A micro framework for PHP. 
+Blini [ˈblinē] is a micro framework skeleton for PHP. 
 
 ## Requirements
 
