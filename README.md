@@ -9,8 +9,20 @@ A micro framework for PHP.
 ## Installation
 
 ```
-composer create-project odan/blini my-app
+git clone https://github.com/odan/blini.git --depth 1 newapp/
 ```
+
+Optional, push to your repo:
+
+```
+cd {myapp/}
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin {github-uri}
+git push -u --force origin master
+```
+
 
 ## Performance Comparison
 
