@@ -9,7 +9,7 @@ A micro framework for PHP.
 ## Installation
 
 ```
-git clone https://github.com/odan/blini.git --depth 1 newapp/
+git clone https://github.com/odan/blini.git --depth 1 myapp/
 ```
 
 Optional, push to your repo:
