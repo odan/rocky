@@ -1,4 +1,4 @@
-# Modo
+# mico
 
 A micro framework skeleton for PHP. 
 
@@ -9,7 +9,7 @@ A micro framework skeleton for PHP.
 ## Installation
 
 ```
-git clone https://github.com/odan/modo.git --depth 1 myapp/
+git clone https://github.com/odan/mico.git --depth 1 myapp/
 cd myapp/
 composer update --no-dev -o
 ```
