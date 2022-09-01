@@ -1,6 +1,6 @@
-# mico
+![logo](https://user-images.githubusercontent.com/781074/187873858-605adcb2-4318-46d8-acd5-09f7ecfe266f.png)
 
-A micro framework skeleton for PHP. 
+mico - a micro framework skeleton for PHP. 
 
 ## Requirements
 
