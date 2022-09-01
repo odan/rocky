@@ -2,17 +2,17 @@
 
 namespace App\Action;
 
-use App\Router\RouteParser;
+use App\Router\UrlGenerator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class HomeAction
 {
-    private RouteParser $routeParser;
+    private UrlGenerator $urlGenerator;
 
-    public function __construct(RouteParser $routeParser)
+    public function __construct(UrlGenerator $urlGenerator)
     {
-        $this->routeParser = $routeParser;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function __invoke(
@@ -20,11 +20,11 @@ final class HomeAction
         ResponseInterface $response,
         array $args = []
     ): ResponseInterface {
-        $route = $this->routeParser->getNamedRoute('username');
+        $route = $this->urlGenerator->getNamedRoute('username');
 
-        $url = $this->routeParser->urlFor('username', ['id' => 123, 'name' => 'daniel']);
+        $url = $this->urlGenerator->urlFor('username', ['id' => 123, 'name' => 'daniel']);
 
-        $url2 = $this->routeParser->fullUrlFor($request->getUri(), 'username', ['id' => 123, 'name' => 'daniel']);
+        $url2 = $this->urlGenerator->fullUrlFor($request->getUri(), 'username', ['id' => 123, 'name' => 'daniel']);
 
         $response->getBody()->write('OK<br>' . var_export($args, true) . '<br>' . $url2);
 

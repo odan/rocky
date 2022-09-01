@@ -10,13 +10,15 @@ use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
 
+use UnexpectedValueException;
+
 use function array_key_exists;
 use function array_reverse;
 use function http_build_query;
 use function implode;
 use function is_string;
 
-final class RouteParser
+final class UrlGenerator
 {
     private RouteCollector $routeCollector;
     private Std $routeParser;
@@ -112,6 +114,6 @@ final class RouteParser
             }
         }
 
-        throw new RuntimeException('Named route does not exist for name: ' . $name);
+        throw new UnexpectedValueException('Named route does not exist for name: ' . $name);
     }
 }
