@@ -15,7 +15,7 @@ composer update
 Start the app:
 
 ```
-composer run
+composer start
 ```
 
 Open: <http://localhost:8080>
