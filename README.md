@@ -9,7 +9,7 @@
 ```
 git clone https://github.com/odan/rocky.git --depth 1 myapp/
 cd myapp/
-composer update --no-dev -o
+composer update
 ```
 
 Start the app:
