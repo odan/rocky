@@ -1,6 +1,5 @@
 <div align="center">
   <img src="https://user-images.githubusercontent.com/781074/191797474-c2207979-4045-40c4-b093-dc95158eb564.jpg" width=250>
-  
   A micro framework skeleton for PHP. 
 </div>
 
@@ -15,7 +14,7 @@ composer update --no-dev -o
 Start the app:
 
 ```
-php -S localhost:8080 -t public/
+composer run
 ```
 
 Open: <http://localhost:8080>
