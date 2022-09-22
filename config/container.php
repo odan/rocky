@@ -1,7 +1,7 @@
 <?php
 
-use App\Router\UrlGenerator;
 use App\Router\Router;
+use App\Router\UrlGenerator;
 use FastRoute\DataGenerator\GroupCountBased;
 use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std;

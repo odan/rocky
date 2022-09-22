@@ -8,8 +8,6 @@ use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
-use RuntimeException;
-
 use UnexpectedValueException;
 
 use function array_key_exists;
