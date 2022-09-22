@@ -1,7 +1,7 @@
 <?php
 
-use App\Router\Router;
-use App\Router\UrlGenerator;
+use App\Routing\Router;
+use App\Routing\UrlGenerator;
 use FastRoute\DataGenerator\GroupCountBased;
 use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std;
@@ -35,7 +35,12 @@ return [
     },
 
     Router::class => function () {
-        return new Router(new RouteCollector(new Std(), new GroupCountBased()));
+        $router = new Router(new RouteCollector(new Std(), new GroupCountBased()));
+
+        // Collect routes
+        (require __DIR__ . '/routes.php')($router);
+
+        return $router;
     },
 
     UrlGenerator::class => function (ContainerInterface $container) {

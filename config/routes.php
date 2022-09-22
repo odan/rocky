@@ -2,7 +2,7 @@
 
 use App\Middleware\ApiExceptionMiddleware;
 use App\Middleware\OutgoingMiddleware;
-use App\Router\Router;
+use App\Routing\Router;
 
 return function (Router $router) {
     $router->get('/', \App\Action\HomeAction::class);

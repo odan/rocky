@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Router;
+namespace App\Routing;
 
 use Psr\Http\Server\MiddlewareInterface;
 

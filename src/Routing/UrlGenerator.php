@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Router;
+namespace App\Routing;
 
 use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std;

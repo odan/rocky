@@ -2,8 +2,8 @@
 
 namespace App\Middleware;
 
+use App\Http\HttpExceptionInterface;
 use App\Renderer\ErrorRenderer;
-use App\Router\HttpExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

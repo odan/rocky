@@ -2,7 +2,7 @@
 
 namespace App\Middleware;
 
-use App\Router\Router;
+use App\Routing\Router;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

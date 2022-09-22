@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Router;
+namespace App\Routing;
 
 use FastRoute\RouteCollector;
 use Psr\Http\Server\MiddlewareInterface;

@@ -2,7 +2,7 @@
 
 namespace App\Action;
 
-use App\Router\UrlGenerator;
+use App\Routing\UrlGenerator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
