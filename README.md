@@ -7,7 +7,7 @@
 ## Installation
 
 ```
-git clone https://github.com/odan/mico.git --depth 1 myapp/
+git clone https://github.com/odan/rocky.git --depth 1 myapp/
 cd myapp/
 composer update --no-dev -o
 ```
