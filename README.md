@@ -7,7 +7,7 @@
 ## Installation
 
 ```
-git clone https://github.com/odan/rocky.git --depth 1 myapp/
+git clone https://github.com/rocky-php/rocky.git --depth 1 myapp/
 cd myapp/
 composer update
 ```
