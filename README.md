@@ -7,8 +7,8 @@
 ## Installation
 
 ```
-git clone https://github.com/rocky-php/rocky.git --depth 1 myapp/
-cd myapp/
+git clone https://github.com/rocky-php/rocky.git --depth 1 my-rocky-app/
+cd my-rocky-app/
 composer update
 ```
 
