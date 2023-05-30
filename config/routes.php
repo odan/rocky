@@ -6,7 +6,7 @@ use App\Routing\Router;
 
 return function (Router $router) {
     $router->get('/', \App\Action\HomeAction::class);
-    $router->get('/user/{name}/{id:[0-9]+}', \App\Action\HomeAction::class)->setName('username');
+    $router->get('/users/{name}/{id:[0-9]+}', \App\Action\HomeAction::class)->setName('username');
 
     $router->group('/api', function (Router $router) {
         $router->get('/users', \App\Action\UserListAction::class);

@@ -1,3 +1,5 @@
+includes:
+    - vendor/bnf/phpstan-psr-container/extension.neon
 parameters:
 	level: max
 	checkMissingIterableValueType: false
