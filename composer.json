@@ -1,7 +1,6 @@
 {
     "require": {
         "fig/http-message-util": "^1.1",
-        "laminas/laminas-httphandlerrunner": "^2.1",
         "nikic/fast-route": "^1.3",
         "nyholm/psr7": "^1.5",
         "nyholm/psr7-server": "^1.0",
