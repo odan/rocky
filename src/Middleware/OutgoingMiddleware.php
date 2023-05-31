@@ -13,9 +13,13 @@ final class OutgoingMiddleware implements MiddlewareInterface
     {
         $response = $handler->handle($request);
 
-        // Demo
+        // Handle outgoing response
+        // For example: Header Propagation, CORS, Compression
+
+        // Add some response headers
         $rand = rand(1, 9999999);
         $response = $response->withAddedHeader('X-OutgoingMiddleware-' . $rand, (string)$rand);
+        $response = $response->withHeader('X-OutgoingMiddleware', 'value');
 
         return $response;
     }

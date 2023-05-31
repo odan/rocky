@@ -16,23 +16,13 @@ class HomeActionTest extends TestCase
 {
     use AppTestTrait;
 
-    public function testHome(): void
+    public function testAction(): void
     {
         $request = new ServerRequest('GET', '/');
         $response = $this->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-        $this->assertStringContainsString('/users/daniel/123', (string)$response->getBody());
-    }
-
-    public function testUsername(): void
-    {
-        $request = new ServerRequest('GET', '/users/max/9876');
-        $response = $this->handle($request);
-
-        $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-        $this->assertStringContainsString('max', (string)$response->getBody());
-        $this->assertStringContainsString('9876', (string)$response->getBody());
+        $this->assertSame('Hello World', (string)$response->getBody());
     }
 
     public function testPageNotFound(): void
