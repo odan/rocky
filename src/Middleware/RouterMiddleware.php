@@ -27,9 +27,10 @@ final class RouterMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // Collect routes
+        // Collect route paths
         (require __DIR__ . '/../../config/routes.php')($this->router);
 
+        // Dispatch
         $dispatcher = new GroupCountBased($this->router->getRouteCollector()->getData());
 
         $httpMethod = $request->getMethod();
