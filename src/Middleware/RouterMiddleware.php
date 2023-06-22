@@ -2,7 +2,7 @@
 
 namespace App\Middleware;
 
-use App\Http\HttpNotAllowedException;
+use App\Http\HttpMethodNotAllowedException;
 use App\Http\HttpNotFoundException;
 use App\Routing\Router;
 use FastRoute\Dispatcher;
@@ -46,7 +46,7 @@ final class RouterMiddleware implements MiddlewareInterface
 
         if ($dispatcherResult === Dispatcher::METHOD_NOT_ALLOWED) {
             // 405 Method Not Allowed
-            throw new HttpNotAllowedException();
+            throw new HttpMethodNotAllowedException();
         }
 
         // 404 Not Found

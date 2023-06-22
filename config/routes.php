@@ -1,6 +1,6 @@
 <?php
 
-use App\Middleware\IncomingMiddleware;
+use App\Middleware\AuthMiddleware;
 use App\Middleware\OutgoingMiddleware;
 use App\Routing\Router;
 
@@ -20,5 +20,5 @@ return function (Router $router) {
                 ->add(OutgoingMiddleware::class);
         })->add(OutgoingMiddleware::class)
             ->add(OutgoingMiddleware::class);
-    })->add(IncomingMiddleware::class);
+    })->add(AuthMiddleware::class);
 };
