@@ -24,7 +24,7 @@ final class ErrorRenderer
         $response = $this->responseFactory->createResponse($httpStatusCode);
 
         // JSON
-        if (strpos($request->getHeaderLine('Accept'), 'application/json') !== false) {
+        if (str_contains($request->getHeaderLine('Accept'), 'application/json')) {
             $response = $response->withAddedHeader('Content-Type', 'application/json');
 
             $body = (string)json_encode(
