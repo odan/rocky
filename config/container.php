@@ -1,5 +1,6 @@
 <?php
 
+use App\Middleware\RouterMiddleware;
 use App\Routing\Router;
 use App\Routing\UrlGenerator;
 use FastRoute\DataGenerator\GroupCountBased;
@@ -36,6 +37,16 @@ return [
 
     Router::class => function () {
         return new Router(new RouteCollector(new Std(), new GroupCountBased()));
+    },
+
+    RouterMiddleware::class => function (ContainerInterface $container) {
+        return new RouterMiddleware(
+            $container->get(Router::class),
+            $container,
+            function ($router) {
+                (require __DIR__ . '/routes.php')($router);
+            },
+        );
     },
 
     UrlGenerator::class => function (ContainerInterface $container) {

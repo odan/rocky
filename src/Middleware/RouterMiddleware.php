@@ -19,16 +19,22 @@ final class RouterMiddleware implements MiddlewareInterface
     private Router $router;
     private ContainerInterface $container;
 
-    public function __construct(Router $router, ContainerInterface $container)
+    /**
+     * @var callable
+     */
+    private $routeLoader;
+
+    public function __construct(Router $router, ContainerInterface $container, callable $routeLoader)
     {
         $this->router = $router;
         $this->container = $container;
+        $this->routeLoader = $routeLoader;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // Collect route paths
-        (require __DIR__ . '/../../config/routes.php')($this->router);
+        // Load routes from callback function
+        call_user_func($this->routeLoader, $this->router);
 
         // Dispatch
         $dispatcher = new GroupCountBased($this->router->getRouteCollector()->getData());

@@ -2,7 +2,6 @@
 
 namespace App\Middleware;
 
-use App\Http\HttpMethodNotAllowedException;
 use App\Http\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
