@@ -20,7 +20,7 @@ final class AuthMiddleware implements MiddlewareInterface
 
         if (!$token) {
             // No valid authentication credentials for the requested resource
-            throw new HttpUnauthorizedException();
+            throw new HttpUnauthorizedException($request);
         }
 
         // Invoke next middleware

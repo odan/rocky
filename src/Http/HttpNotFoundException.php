@@ -2,9 +2,7 @@
 
 namespace App\Http;
 
-use RuntimeException;
-
-final class HttpNotFoundException extends RuntimeException implements HttpExceptionInterface
+final class HttpNotFoundException extends HttpException
 {
     /** @phpstan-ignore-next-line */
     protected $message = 'Not Found';

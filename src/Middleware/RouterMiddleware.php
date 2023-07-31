@@ -52,11 +52,11 @@ final class RouterMiddleware implements MiddlewareInterface
 
         if ($dispatcherResult === Dispatcher::METHOD_NOT_ALLOWED) {
             // 405 Method Not Allowed
-            throw new HttpMethodNotAllowedException();
+            throw new HttpMethodNotAllowedException($request);
         }
 
         // 404 Not Found
-        throw new HttpNotFoundException();
+        throw new HttpNotFoundException($request);
     }
 
     private function handleFound(

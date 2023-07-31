@@ -2,9 +2,7 @@
 
 namespace App\Http;
 
-use RuntimeException;
-
-final class HttpUnauthorizedException extends RuntimeException implements HttpExceptionInterface
+final class HttpUnauthorizedException extends HttpException
 {
     /** @phpstan-ignore-next-line */
     protected $message = 'Unauthorized';

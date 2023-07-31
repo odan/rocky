@@ -2,9 +2,7 @@
 
 namespace App\Http;
 
-use RuntimeException;
-
-final class HttpMethodNotAllowedException extends RuntimeException implements HttpExceptionInterface
+final class HttpMethodNotAllowedException extends HttpException
 {
     /** @phpstan-ignore-next-line */
     protected $message = 'Method Not Allowed';
