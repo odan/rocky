@@ -93,7 +93,7 @@ final class RouterMiddleware implements MiddlewareInterface
         array $middlewares
     ): ResponseInterface {
         // Tunnel the response object through the route/group specific middleware stack
-        $middlewares[] = new class($response) implements MiddlewareInterface {
+        $middlewares[] = new class ($response) implements MiddlewareInterface {
             private ResponseInterface $response;
 
             public function __construct(ResponseInterface $response)

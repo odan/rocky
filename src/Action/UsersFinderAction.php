@@ -2,11 +2,19 @@
 
 namespace App\Action;
 
+use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class UsersFinderAction
 {
+    private JsonRenderer $renderer;
+
+    public function __construct(JsonRenderer $renderer)
+    {
+        $this->renderer = $renderer;
+    }
+
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
@@ -17,9 +25,7 @@ final class UsersFinderAction
                 'email' => 'john@example.com',
             ],
         ];
-        $response = $response->withHeader('Content-Type', 'application/json');
-        $response->getBody()->write((string)json_encode($users));
 
-        return $response;
+        return $this->renderer->json($response, $users);
     }
 }

@@ -10,10 +10,14 @@ use Throwable;
 final class ErrorRenderer
 {
     private ResponseFactoryInterface $responseFactory;
+    private JsonRenderer $renderer;
 
-    public function __construct(ResponseFactoryInterface $responseFactory)
-    {
+    public function __construct(
+        ResponseFactoryInterface $responseFactory,
+        JsonRenderer $jsonRenderer
+    ) {
         $this->responseFactory = $responseFactory;
+        $this->renderer = $jsonRenderer;
     }
 
     public function render(
@@ -27,17 +31,13 @@ final class ErrorRenderer
         if (str_contains($request->getHeaderLine('Accept'), 'application/json')) {
             $response = $response->withAddedHeader('Content-Type', 'application/json');
 
-            $body = (string)json_encode(
-                [
-                    'error' => [
-                        'message' => $exception->getMessage(),
-                    ],
-                ]
-            );
+            $data = [
+                'error' => [
+                    'message' => $exception->getMessage(),
+                ],
+            ];
 
-            $response->getBody()->write($body);
-
-            return $response;
+            return $this->renderer->json($response, $data);
         }
 
         // HTML

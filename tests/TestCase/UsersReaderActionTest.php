@@ -19,6 +19,8 @@ class UsersReaderActionTest extends TestCase
     public function testAction(): void
     {
         $request = new ServerRequest('GET', '/api/users/daniel/123');
+        $request = $request->withHeader('Authorization', 'token');
+
         $response = $this->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());

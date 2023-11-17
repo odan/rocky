@@ -19,6 +19,8 @@ class UsersFinderActionTest extends TestCase
     public function test(): void
     {
         $request = new ServerRequest('GET', '/api/users');
+        $request = $request->withHeader('Authorization', 'token');
+
         $response = $this->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
@@ -28,6 +30,8 @@ class UsersFinderActionTest extends TestCase
     public function test2(): void
     {
         $request = new ServerRequest('GET', '/api/pizzas');
+        $request = $request->withHeader('Authorization', 'token');
+
         $response = $this->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
