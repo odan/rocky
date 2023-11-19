@@ -9,14 +9,14 @@
 Run the following commands to create a new project:
 
 ```
-curl --output rocky.zip https://codeload.github.com/odan/rocky/zip/refs/heads/master
+curl --output rocky.tar.gz https://codeload.github.com/odan/rocky/tar.gz/refs/heads/master
 mkdir my-project
-tar -xf rocky.zip --strip-components=1 -C my-project
+tar -xf rocky.tar.gz --strip-components=1 -C my-project
 cd my-project/
 composer update
 ```
 
-Note: These commands work on Linux and Windows.
+**Note:** These commands work on Linux and Windows.
 
 Start the app:
 
