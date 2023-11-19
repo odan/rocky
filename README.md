@@ -9,10 +9,14 @@
 Run the following commands to create a new project:
 
 ```
-git clone https://github.com/odan/rocky.git --depth 1 my-rocky-app/
-cd my-rocky-app/
+curl --output rocky.zip https://codeload.github.com/odan/rocky/zip/refs/heads/master
+mkdir my-project
+tar -xf rocky.zip --strip-components=1 -C my-project
+cd my-project/
 composer update
 ```
+
+Note: These commands work on Linux and Windows.
 
 Start the app:
 
@@ -22,6 +26,16 @@ composer start
 
 Open: <http://localhost:8080>
 
+## Change log
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## Testing
+
+```
+composer test
+```
+
 ## License
 
-The MIT License (MIT).
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
