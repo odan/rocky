@@ -3,18 +3,18 @@
 namespace App\Action;
 
 use App\Renderer\JsonRenderer;
-use App\Routing\UrlGenerator;
+use App\Routing\LinkGenerator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class UsersReaderAction
 {
-    private UrlGenerator $urlGenerator;
+    private LinkGenerator $linkGenerator;
     private JsonRenderer $renderer;
 
-    public function __construct(UrlGenerator $urlGenerator, JsonRenderer $renderer)
+    public function __construct(LinkGenerator $linkGenerator, JsonRenderer $renderer)
     {
-        $this->urlGenerator = $urlGenerator;
+        $this->linkGenerator = $linkGenerator;
         $this->renderer = $renderer;
     }
 
@@ -23,9 +23,9 @@ final class UsersReaderAction
         ResponseInterface $response,
         array $args = []
     ): ResponseInterface {
-        $route = $this->urlGenerator->getNamedRoute('user-url');
-        $url = $this->urlGenerator->urlFor('user-url', ['id' => 123, 'name' => 'daniel']);
-        $url2 = $this->urlGenerator->fullUrlFor($request->getUri(), 'user-url', $args);
+        $route = $this->linkGenerator->getNamedRoute('user-url');
+        $url = $this->linkGenerator->urlFor('user-url', ['id' => 123, 'name' => 'daniel']);
+        $url2 = $this->linkGenerator->fullUrlFor($request->getUri(), 'user-url', $args);
 
         $data = [
             'route' => $route->getPattern(),

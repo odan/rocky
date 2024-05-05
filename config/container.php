@@ -1,8 +1,8 @@
 <?php
 
 use App\Middleware\RouterMiddleware;
+use App\Routing\LinkGenerator;
 use App\Routing\Router;
-use App\Routing\UrlGenerator;
 use FastRoute\DataGenerator\GroupCountBased;
 use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std;
@@ -49,8 +49,8 @@ return [
         );
     },
 
-    UrlGenerator::class => function (ContainerInterface $container) {
-        return new UrlGenerator($container->get(Router::class));
+    LinkGenerator::class => function (ContainerInterface $container) {
+        return new LinkGenerator($container->get(Router::class));
     },
 
     ResponseFactoryInterface::class => function (ContainerInterface $container) {

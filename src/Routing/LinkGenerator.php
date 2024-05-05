@@ -16,7 +16,7 @@ use function http_build_query;
 use function implode;
 use function is_string;
 
-final class UrlGenerator
+final class LinkGenerator
 {
     private RouteCollector $routeCollector;
     private Std $routeParser;
