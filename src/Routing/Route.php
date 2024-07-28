@@ -2,38 +2,33 @@
 
 namespace App\Routing;
 
-use Psr\Http\Server\MiddlewareInterface;
-
-final class Route
+final class Route implements MiddlewareAwareInterface
 {
-    private ?string $name = null;
-    private ?Router $router;
-    private string $controller;
-    private array $middleware = [];
-    private string $pattern;
-    private string $httpMethod;
+    use MiddlewareAwareTrait;
 
-    public function __construct(string $httpMethod, string $pattern, string $controller, ?Router $router)
+    private string $httpMethod;
+    private string $pattern;
+    private mixed $handler;
+    private Router $router;
+    private ?string $name = null;
+
+    public function __construct(string $httpMethod, string $pattern, callable|string $handler, Router $router)
     {
-        $this->pattern = $pattern;
-        $this->controller = $controller;
-        $this->router = $router;
         $this->httpMethod = $httpMethod;
+        $this->pattern = $pattern;
+        $this->handler = $handler;
+        $this->router = $router;
     }
 
     public function __invoke(): array
     {
-        $middlewares = $this->middleware;
-        $router = $this->router;
-        while ($router) {
-            foreach ($router->getMiddlewares() as $middleware) {
-                $middlewares[] = $middleware;
-            }
-            $router = $router->getParent();
+        $middlewares = $this->getMiddlewareStack();
+        foreach ($this->router->getMiddlewareStack() as $middleware) {
+            $middlewares[] = $middleware;
         }
 
         return [
-            'handler' => $this->controller,
+            'handler' => $this->handler,
             'middleware' => $middlewares,
         ];
     }
@@ -48,20 +43,6 @@ final class Route
     public function getName(): ?string
     {
         return $this->name;
-    }
-
-    public function add(string $middleware): self
-    {
-        $this->middleware[] = $middleware;
-
-        return $this;
-    }
-
-    public function addMiddleware(MiddlewareInterface $middleware): self
-    {
-        $this->middleware[] = $middleware;
-
-        return $this;
     }
 
     public function getPattern(): string

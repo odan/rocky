@@ -7,48 +7,20 @@ use Psr\Http\Server\MiddlewareInterface;
 
 final class Router
 {
-    private ?Router $parent;
+    use RouteCollectionTrait;
+    use MiddlewareAwareTrait;
+
     private RouteCollector $collector;
-    private string $groupPattern;
-    private array $middleware;
     private string $basePath = '';
 
-    public function __construct(RouteCollector $collector, string $pattern = '')
+    public function __construct(RouteCollector $collector)
     {
-        $this->parent = null;
         $this->collector = $collector;
-        $this->groupPattern = $pattern;
-        $this->middleware = [];
     }
 
-    public function get(string $route, string $handler): Route
+    public function map(string $httpMethod, string $path, callable|string $handler): Route
     {
-        return $this->addRoute('GET', $route, $handler);
-    }
-
-    public function post(string $route, string $handler): Route
-    {
-        return $this->addRoute('POST', $route, $handler);
-    }
-
-    public function put(string $route, string $handler): Route
-    {
-        return $this->addRoute('PUT', $route, $handler);
-    }
-
-    public function patch(string $route, string $handler): Route
-    {
-        return $this->addRoute('PATCH', $route, $handler);
-    }
-
-    public function delete(string $route, string $handler): Route
-    {
-        return $this->addRoute('DELETE', $route, $handler);
-    }
-
-    public function addRoute(string $httpMethod, string $pattern, string $handler): Route
-    {
-        $routePattern = $this->basePath . $this->groupPattern . $pattern;
+        $routePattern = $this->basePath . $path;
         $route = new Route($httpMethod, $routePattern, $handler, $this);
 
         $this->collector->addRoute($httpMethod, $routePattern, $route);
@@ -56,40 +28,13 @@ final class Router
         return $route;
     }
 
-    public function group(string $pattern, callable $callable): Router
+    public function group(string $pattern, callable $callable): MiddlewareAwareInterface
     {
-        $routePattern = $this->basePath . $this->groupPattern . $pattern;
-        $routeGroup = new self($this->collector, $routePattern);
-        $routeGroup->parent = $this;
-
-        // Collect routes
-        $callable($routeGroup);
+        $routePattern = $this->basePath . $pattern;
+        $routeGroup = new RouteGroup($routePattern, $callable, $this);
+        $this->collector->addGroup($routePattern, $routeGroup);
 
         return $routeGroup;
-    }
-
-    public function add(string $middleware): self
-    {
-        $this->middleware[] = $middleware;
-
-        return $this;
-    }
-
-    public function addMiddleware(MiddlewareInterface $middleware): self
-    {
-        $this->middleware[] = $middleware;
-
-        return $this;
-    }
-
-    public function getMiddlewares(): array
-    {
-        return $this->middleware;
-    }
-
-    public function getParent(): ?Router
-    {
-        return $this->parent;
     }
 
     public function getRouteCollector(): RouteCollector

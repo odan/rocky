@@ -24,6 +24,19 @@ class UsersReaderActionTest extends TestCase
         $response = $this->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-        $this->assertStringContainsString('/api/users/daniel/123', (string)$response->getBody());
+
+        $json = (string)$response->getBody();
+        $actual = json_decode($json, true);
+        $expected = [
+            'route' => '/api/users/{name}/{id:[0-9]+}',
+            'url' => '/api/users/daniel/123',
+            'url2' => '/api/users/daniel/123',
+            'args' => [
+                'name' => 'daniel',
+                'id' => '123',
+            ],
+        ];
+
+        $this->assertSame($expected, $actual);
     }
 }
