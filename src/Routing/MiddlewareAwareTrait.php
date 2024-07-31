@@ -18,14 +18,14 @@ trait MiddlewareAwareTrait
         return $this->middleware;
     }
 
-    public function add(string $middleware): MiddlewareAwareInterface
+    public function add(string $middleware): self
     {
         $this->middleware[] = $middleware;
 
         return $this;
     }
 
-    public function addMiddleware(MiddlewareInterface $middleware): MiddlewareAwareInterface
+    public function addMiddleware(MiddlewareInterface $middleware): self
     {
         $this->middleware[] = $middleware;
 
