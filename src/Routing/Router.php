@@ -3,7 +3,6 @@
 namespace App\Routing;
 
 use FastRoute\RouteCollector;
-use Psr\Http\Server\MiddlewareInterface;
 
 final class Router
 {
