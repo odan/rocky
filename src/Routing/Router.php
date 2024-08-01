@@ -20,7 +20,7 @@ final class Router
     public function map(array $methods, string $path, callable|string $handler): Route
     {
         $routePattern = $this->basePath . $path;
-        $route = new Route($methods, $routePattern, $handler, $this);
+        $route = new Route($methods, $routePattern, $handler);
 
         $this->collector->addRoute($methods, $routePattern, $route);
 

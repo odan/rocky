@@ -8,29 +8,24 @@ final class Route implements MiddlewareAwareInterface
 
     private array $methods;
     private string $pattern;
-    private mixed $handler;
-    private Router $router;
+
+    /**
+     * @var callable|string
+     */
+    private $handler;
+
     private ?string $name = null;
 
-    public function __construct(array $methods, string $pattern, callable|string $handler, Router $router)
+    public function __construct(array $methods, string $pattern, callable|string $handler)
     {
         $this->methods = $methods;
         $this->pattern = $pattern;
         $this->handler = $handler;
-        $this->router = $router;
     }
 
-    public function __invoke(): array
+    public function getHandler(): callable|string
     {
-        $middlewares = $this->getMiddlewareStack();
-        foreach ($this->router->getMiddlewareStack() as $middleware) {
-            $middlewares[] = $middleware;
-        }
-
-        return [
-            'handler' => $this->handler,
-            'middleware' => $middlewares,
-        ];
+        return $this->handler;
     }
 
     public function setName(string $name): self

@@ -40,13 +40,11 @@ return [
     },
 
     RouterMiddleware::class => function (ContainerInterface $container) {
-        return new RouterMiddleware(
-            $container->get(Router::class),
-            $container,
-            function ($router) {
-                (require __DIR__ . '/routes.php')($router);
-            },
-        );
+        // Load routes from callback function
+        $router = $container->get(Router::class);
+        (require __DIR__ . '/routes.php')($router);
+
+        return new RouterMiddleware($router);
     },
 
     UrlGenerator::class => function (ContainerInterface $container) {

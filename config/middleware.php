@@ -5,6 +5,7 @@ return [
     \App\Middleware\HttpExceptionMiddleware::class,
     \App\Middleware\BasePathMiddleware::class,
     \App\Middleware\RouterMiddleware::class,
+    \App\Middleware\EndpointMiddleware::class,
     \App\Middleware\OutgoingMiddleware::class,
     \App\Middleware\ResponseFactoryMiddleware::class,
 ];

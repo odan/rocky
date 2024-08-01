@@ -38,11 +38,11 @@ class RouteGroup implements MiddlewareAwareInterface, RouteCollectionInterface
         return $this->prefix;
     }
 
-    public function map(array $method, string $path, callable|string $handler): Route
+    public function map(array $methods, string $path, callable|string $handler): Route
     {
         $routePath = ($path === '/') ? $this->prefix : $this->prefix . sprintf('/%s', ltrim($path, '/'));
-        $route = new Route($method, $routePath, $handler, $this->router);
-        $this->routeCollector->addRoute($method, $path, $route);
+        $route = new Route($methods, $routePath, $handler);
+        $this->routeCollector->addRoute($methods, $path, $route);
 
         return $route;
     }
