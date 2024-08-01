@@ -69,8 +69,9 @@ class EndpointMiddleware implements MiddlewareInterface
         $actionHandler = $route->getHandler();
         $middlewares = $route->getMiddlewareStack();
 
+        // Endpoint specific middleware
         if ($middlewares) {
-            $response = $this->invokeMiddlewareHandlers($request, $response, $middlewares);
+            $response = $this->invokeMiddlewareStack($request, $response, $middlewares);
         }
 
         if (is_string($actionHandler)) {
@@ -81,7 +82,7 @@ class EndpointMiddleware implements MiddlewareInterface
         return $actionHandler($request, $response, $vars);
     }
 
-    private function invokeMiddlewareHandlers(
+    private function invokeMiddlewareStack(
         ServerRequestInterface $request,
         ResponseInterface $response,
         array $middlewares
