@@ -29,7 +29,7 @@ class RouteGroup implements MiddlewareAwareInterface, RouteCollectionInterface
 
     public function __invoke(): void
     {
-        // This will be invoked by FastRoute
+        // This will be invoked by FastRoute to collect the route groups
         ($this->callback)($this);
     }
 
