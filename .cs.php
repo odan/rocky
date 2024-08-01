@@ -45,9 +45,7 @@ return (new Config())
             'single_line_throw' => false,
             'declare_strict_types' => false,
             'blank_line_between_import_groups' => true,
-            'fully_qualified_strict_types' => [
-                'leading_backslash_in_global_namespace' => true,
-            ],
+            'fully_qualified_strict_types' => true,
             'no_null_property_initialization' => false,
             'nullable_type_declaration_for_default_null_value' => false,
             'operator_linebreak' => [
@@ -62,6 +60,11 @@ return (new Config())
             'class_definition' => [
                 'space_before_parenthesis' => true,
             ],
+            'declare_equal_normalize' => false,
+            'phpdoc_summary' => false,
+            'phpdoc_add_missing_param_annotation' => false,
+            'no_useless_concat_operator' => false,
+            'fully_qualified_strict_types' => false,
         ]
     )
     ->setFinder(

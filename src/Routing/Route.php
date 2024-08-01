@@ -6,15 +6,15 @@ final class Route implements MiddlewareAwareInterface
 {
     use MiddlewareAwareTrait;
 
-    private string $httpMethod;
+    private array $methods;
     private string $pattern;
     private mixed $handler;
     private Router $router;
     private ?string $name = null;
 
-    public function __construct(string $httpMethod, string $pattern, callable|string $handler, Router $router)
+    public function __construct(array $methods, string $pattern, callable|string $handler, Router $router)
     {
-        $this->httpMethod = $httpMethod;
+        $this->methods = $methods;
         $this->pattern = $pattern;
         $this->handler = $handler;
         $this->router = $router;
@@ -50,8 +50,8 @@ final class Route implements MiddlewareAwareInterface
         return $this->pattern;
     }
 
-    public function getMethod(): string
+    public function getMethods(): array
     {
-        return $this->httpMethod;
+        return $this->methods;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Routing;
 
@@ -12,7 +12,7 @@ interface RouteCollectionInterface
 
     public function head(string $path, callable $handler): Route;
 
-    public function map(string $method, string $path, callable $handler): Route;
+    public function map(array $methods, string $path, callable $handler): Route;
 
     public function options(string $path, callable $handler): Route;
 

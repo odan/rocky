@@ -17,12 +17,12 @@ final class Router
         $this->collector = $collector;
     }
 
-    public function map(string $httpMethod, string $path, callable|string $handler): Route
+    public function map(array $methods, string $path, callable|string $handler): Route
     {
         $routePattern = $this->basePath . $path;
-        $route = new Route($httpMethod, $routePattern, $handler, $this);
+        $route = new Route($methods, $routePattern, $handler, $this);
 
-        $this->collector->addRoute($httpMethod, $routePattern, $route);
+        $this->collector->addRoute($methods, $routePattern, $route);
 
         return $route;
     }

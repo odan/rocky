@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Routing;
 
@@ -38,7 +38,7 @@ class RouteGroup implements MiddlewareAwareInterface, RouteCollectionInterface
         return $this->prefix;
     }
 
-    public function map(string $method, string $path, callable|string $handler): Route
+    public function map(array $method, string $path, callable|string $handler): Route
     {
         $routePath = ($path === '/') ? $this->prefix : $this->prefix . sprintf('/%s', ltrim($path, '/'));
         $route = new Route($method, $routePath, $handler, $this->router);
