@@ -7,5 +7,5 @@ return [
     \App\Middleware\RouterMiddleware::class,
     \App\Middleware\EndpointMiddleware::class,
     \App\Middleware\OutgoingMiddleware::class,
-    \App\Middleware\ResponseFactoryMiddleware::class,
+   // \App\Middleware\ResponseFactoryMiddleware::class,
 ];

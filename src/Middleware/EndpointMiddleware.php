@@ -6,6 +6,7 @@ use App\Http\HttpMethodNotAllowedException;
 use App\Http\HttpNotFoundException;
 use App\Routing\RoutingResults;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -19,10 +20,12 @@ use RuntimeException;
 class EndpointMiddleware implements MiddlewareInterface
 {
     private ContainerInterface $container;
+    private ResponseFactoryInterface $responseFactory;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, ResponseFactoryInterface $responseFactory,)
     {
         $this->container = $container;
+        $this->responseFactory = $responseFactory;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -63,13 +66,13 @@ class EndpointMiddleware implements MiddlewareInterface
         $route = $routingResults->getRoute() ?? throw new RuntimeException('Route not found.');
         $vars = $routingResults->getRouteArguments();
 
-        $response = $handler->handle($request);
+        $response = $this->responseFactory->createResponse();
 
         // Get handler and middlewares
         $actionHandler = $route->getHandler();
         $middlewares = $route->getMiddlewareStack();
 
-        // Endpoint specific middleware
+        // Endpoint and group specific middleware
         if ($middlewares) {
             $response = $this->invokeMiddlewareStack($request, $response, $middlewares);
         }
