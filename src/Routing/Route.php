@@ -2,9 +2,9 @@
 
 namespace App\Routing;
 
-final class Route implements MiddlewareAwareInterface
+final class Route implements MiddlewareCollectionInterface
 {
-    use MiddlewareAwareTrait;
+    use MiddlewareCollectionTrait;
 
     private array $methods;
     private string $pattern;

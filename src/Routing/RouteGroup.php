@@ -6,9 +6,9 @@ namespace App\Routing;
 
 use FastRoute\RouteCollector;
 
-class RouteGroup implements MiddlewareAwareInterface, RouteCollectionInterface
+class RouteGroup implements MiddlewareCollectionInterface, RouteCollectionInterface
 {
-    use MiddlewareAwareTrait;
+    use MiddlewareCollectionTrait;
     use RouteCollectionTrait;
 
     /**
@@ -47,7 +47,7 @@ class RouteGroup implements MiddlewareAwareInterface, RouteCollectionInterface
         return $route;
     }
 
-    public function group(string $path, callable $handler): MiddlewareAwareInterface
+    public function group(string $path, callable $handler): MiddlewareCollectionInterface
     {
         $routePath = ($path === '/') ? $this->prefix : $this->prefix . sprintf('/%s', ltrim($path, '/'));
         $routeGroup = new RouteGroup($routePath, $handler, $this->router);

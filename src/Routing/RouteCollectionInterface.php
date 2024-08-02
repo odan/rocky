@@ -6,19 +6,23 @@ namespace App\Routing;
 
 interface RouteCollectionInterface
 {
-    public function delete(string $path, callable $handler): Route;
+    public function map(array $methods, string $path, string $handler): Route;
 
-    public function get(string $path, callable $handler): Route;
+    public function group(string $path, callable $handler): MiddlewareCollectionInterface;
 
-    public function head(string $path, callable $handler): Route;
+    public function any(string $path, string $handler): Route;
 
-    public function map(array $methods, string $path, callable $handler): Route;
+    public function delete(string $path, string $handler): Route;
 
-    public function options(string $path, callable $handler): Route;
+    public function get(string $path, string $handler): Route;
 
-    public function patch(string $path, callable $handler): Route;
+    public function head(string $path, string $handler): Route;
 
-    public function post(string $path, callable $handler): Route;
+    public function options(string $path, string $handler): Route;
 
-    public function put(string $path, callable $handler): Route;
+    public function patch(string $path, string $handler): Route;
+
+    public function post(string $path, string $handler): Route;
+
+    public function put(string $path, string $handler): Route;
 }

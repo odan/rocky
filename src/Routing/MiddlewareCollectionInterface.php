@@ -6,7 +6,7 @@ namespace App\Routing;
 
 use Psr\Http\Server\MiddlewareInterface;
 
-interface MiddlewareAwareInterface
+interface MiddlewareCollectionInterface
 {
     public function getMiddlewareStack(): array;
 

@@ -7,7 +7,7 @@ use FastRoute\RouteCollector;
 final class Router
 {
     use RouteCollectionTrait;
-    use MiddlewareAwareTrait;
+    use MiddlewareCollectionTrait;
 
     private RouteCollector $collector;
     private string $basePath = '';
@@ -27,7 +27,7 @@ final class Router
         return $route;
     }
 
-    public function group(string $pattern, callable $callable): MiddlewareAwareInterface
+    public function group(string $pattern, callable $callable): MiddlewareCollectionInterface
     {
         $routePattern = $this->basePath . $pattern;
         $routeGroup = new RouteGroup($routePattern, $callable, $this);

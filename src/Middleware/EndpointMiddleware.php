@@ -22,7 +22,7 @@ class EndpointMiddleware implements MiddlewareInterface
     private ContainerInterface $container;
     private ResponseFactoryInterface $responseFactory;
 
-    public function __construct(ContainerInterface $container, ResponseFactoryInterface $responseFactory,)
+    public function __construct(ContainerInterface $container, ResponseFactoryInterface $responseFactory)
     {
         $this->container = $container;
         $this->responseFactory = $responseFactory;

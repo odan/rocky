@@ -6,7 +6,7 @@ namespace App\Routing;
 
 use Psr\Http\Server\MiddlewareInterface;
 
-trait MiddlewareAwareTrait
+trait MiddlewareCollectionTrait
 {
     /**
      * @var array
