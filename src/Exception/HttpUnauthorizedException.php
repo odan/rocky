@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http;
+namespace App\Exception;
 
 final class HttpUnauthorizedException extends HttpException
 {

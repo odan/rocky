@@ -2,8 +2,8 @@
 
 namespace App\Middleware;
 
-use App\Http\HttpMethodNotAllowedException;
-use App\Http\HttpNotFoundException;
+use App\Exception\HttpMethodNotAllowedException;
+use App\Exception\HttpNotFoundException;
 use App\Routing\RoutingResults;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
