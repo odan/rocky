@@ -11,7 +11,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use RuntimeException;
 
-final class RouterMiddleware implements MiddlewareInterface
+final class RoutingMiddleware implements MiddlewareInterface
 {
     private Router $router;
 
