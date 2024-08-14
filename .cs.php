@@ -40,7 +40,7 @@ return (new Config())
             'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline'],
             'ordered_imports' => [
                 'sort_algorithm' => 'alpha',
-                'imports_order' => ['class', 'const', 'function'],
+                'imports_order' => ['class', 'function', 'const'],
             ],
             'single_line_throw' => false,
             'declare_strict_types' => false,
